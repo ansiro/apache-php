@@ -1,4 +1,4 @@
-Ansible Simple Role - Apache - PHP
+Ansible Simple Role: Apache - PHP
 =========
 
 This Ansible Simple Role install Apache and PHP. It also allow install php packages and apache modules.
