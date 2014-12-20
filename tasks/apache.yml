@@ -1,0 +1,48 @@
+---
+
+- name: install Apache
+  apt: name=apache2 state=present
+  tags:
+    - apache
+
+- name: ensure required modules are installed
+  apache2_module: >
+    name={{ item }}
+    state=present
+  with_items: apache_modules
+  notify:
+    - restart apache
+  tags:
+    - apache
+    - apache_module
+
+- name: Remove default vhost
+  file:
+    path=/etc/apache2/sites-enabled/000-default.conf
+    state=absent
+  notify:
+    - reload apache
+  tags:
+    - apache
+    - apache_vhost
+
+- name: Copy new virtual host
+  template:
+    src=vhost.j2
+    dest=/etc/apache2/sites-available/{{ vhost_filename }}
+  tags:
+    - apache
+    - apache_vhost
+  notify:
+    - reload apache
+
+- name: Enable the new vhost
+  file:
+    src=/etc/apache2/sites-available/{{ vhost_filename }}
+    dest=/etc/apache2/sites-enabled/{{ vhost_filename }}
+    state=link
+  tags:
+    - apache
+    - apache_vhost
+  notify:
+    - reload apache
