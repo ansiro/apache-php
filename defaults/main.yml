@@ -3,6 +3,8 @@
 php_packages:
   - php5
 
+opcache_enable: 1
+opcache_enable_cli: 0
 opcache_revalidate_freq: 2
 opcache_validate_timestamps: 1
 opcache_max_accelerated_files: 2000
