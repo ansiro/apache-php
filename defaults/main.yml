@@ -3,6 +3,13 @@
 php_packages:
   - php5
 
+opcache_revalidate_freq: 2
+opcache_validate_timestamps: 1
+opcache_max_accelerated_files: 2000
+opcache_memory_consumption: 64
+opcache_interned_strings_buffer: 4
+opcache_fast_shutdown: 0
+
 apache_modules:
   - rewrite
   - php5
