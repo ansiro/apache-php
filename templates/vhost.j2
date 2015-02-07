@@ -1,5 +1,3 @@
-NameVirtualHost *:80
-
 {% for vhost in apache_vhosts %}
 <VirtualHost *:80>
     ServerName {{ vhost.server_name }}
