@@ -13,9 +13,14 @@ NameVirtualHost *:80
 {% endfor %}{% endif %}
 
     <Directory {{ vhost.document_root }}>
-        AllowOverride All
-        Allow from All
+        AllowOverride {{ vhost.directory_AllowOverride }}
+        Allow from {{ vhost.directory_allow_from }}
+        Options {{ vhost.directory_options }}
     </Directory>
+
+{% if vhost.alias_match is defined %}{% for alias_condition, alias_value in vhost.alias_match.iteritems() %}
+    AliasMatch {{ alias_condition }} {{ alias_value }}
+{% endfor %}{% endif %}
 
     <IfModule mod_deflate.c>
         SetOutputFilter DEFLATE

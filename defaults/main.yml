@@ -21,3 +21,8 @@ vhost_filename: aramirez.es.conf
 apache_vhosts:
   - server_name: aramirez.es
     document_root: /var/www/aramirez.es/web
+    directory_AllowOverride: All
+    directory_allow_from: All
+    directory_options: FollowSymLinks
+    alias_match:
+      ^(.*)$: /var/www/aramirez.es/web/index.php

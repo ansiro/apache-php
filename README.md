@@ -37,7 +37,7 @@ apache_modules:
 
 You can override these variable to get installed additional php modules or in order to enable other apache mods.
 
-Moreover **you must** especify what the vhost filename is and a virtual host at least, for instance:
+Moreover **you must** specify what the vhost filename is and a virtual host at least, for instance:
 
 ```yml
 vhost_filename: my-awesome-domain.com.conf
@@ -46,13 +46,16 @@ apache_vhosts:
     document_root: /var/www/my-awesome-domain.com/web
 ```
 
-Additionally, by each vhost you can set both SetEnv values and PHP ones:
+Additionally, by each vhost you can set SetEnv values, PHP ones and AliasMatch:
 
 ```yml
 vhost_filename: my-awesome-domain.com.conf
 apache_vhosts:
   - server_name: my-awesome-domain.com
     document_root: /var/www/my-awesome-domain.com/web
+    directory_AllowOverride: All
+    directory_allow_from: All
+    directory_options: FollowSymLinks
     set_env:
       language: en
     php_value:
@@ -63,6 +66,8 @@ apache_vhosts:
       language: es
     php_value:
       newrelic.appname: my-awesome-domain.es
+    alias_match:
+      ^(.*)$: /var/www/my-awesome-domain.com/web/index.php
 ```
 
 That will end up with a single **my-awesome-domain.com.conf** vhost file and two virtual hosts inside.
