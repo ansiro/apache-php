@@ -17,6 +17,7 @@ apache_modules:
   - php5
 
 vhost_filename: aramirez.es.conf
+listen_port: 80
 
 apache_vhosts:
   - server_name: aramirez.es
