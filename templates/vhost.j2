@@ -5,7 +5,14 @@
 {% if vhost.server_alias is defined %}
     ServerAlias {{ vhost.server_alias }}
 {% endif %}
+{% if vhost.ssl is defined and vhost.ssl %}
 
+    SSLEngine on
+    SSLCompression off
+    SSLCertificateFile {% if vhost.certificate_file is defined %}{{ vhost.certificate_file }}{% else %}{{ certificate_file }}{% endif %}
+    SSLCertificateKeyFile {% if vhost.certificate_key_file is defined %}{{ vhost.certificate_key_file }}{% else %}{{ certificate_key_file }}{% endif %}
+
+{% endif %}
 {% if vhost.set_env is defined %}{% for env_name, env_value in vhost.set_env.iteritems() %}
     SetEnv {{ env_name }} {{ env_value }}
 {% endfor %}{% endif %}
