@@ -10,6 +10,7 @@
     SSLEngine on
     SSLCompression off
     SSLCertificateFile {% if vhost.certificate_file is defined %}{{ vhost.certificate_file }}{% else %}{{ certificate_file }}{% endif %}
+
     SSLCertificateKeyFile {% if vhost.certificate_key_file is defined %}{{ vhost.certificate_key_file }}{% else %}{{ certificate_key_file }}{% endif %}
 
 {% endif %}
